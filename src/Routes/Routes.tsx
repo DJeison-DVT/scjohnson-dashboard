@@ -16,40 +16,40 @@ const router = createBrowserRouter([
 		loader() {
 			return { user: authProvider.username, role: authProvider.role };
 		},
-		Component: Layout,
+		element: <Layout />,
 		children: [
 			{
 				index: true,
 				action: loginAction,
 				loader: authenticatedLoader,
-				Component: Login,
+				element: <Login />,
 			},
 			{
 				path: 'login',
 				action: loginAction,
 				loader: authenticatedLoader,
-				Component: Login,
+				element: <Login />,
 			},
 			{
 				path: 'dashboard',
 				loader: protectedLoader,
-				Component: DashboardLayout,
+				element: <DashboardLayout />,
 				children: [
 					{
 						index: true,
-						Component: Dashboard,
+						element: <Dashboard />,
 					},
 					{
 						path: 'participations',
-						Component: Participations,
+						element: <Participations />,
 					},
 					{
 						path: 'prizes',
-						Component: Prizes,
+						element: <Prizes />,
 					},
 					{
 						path: 'users',
-						Component: Users,
+						element: <Users />,
 						loader: adminLoader,
 					},
 				],

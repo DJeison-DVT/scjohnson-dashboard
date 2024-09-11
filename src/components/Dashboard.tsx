@@ -26,7 +26,7 @@ export default function Dashboard() {
 			<ScrollArea className="flex-1 flex flex-col p-4">
 				<div className="grid grid-cols-2 gap-4 flex-1">
 					<div className="grid grid-cols-3 gap-4 col-span-2">
-						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?idc3bafcbb-16d9-4553-ad73-e18a822cdaf1&maxDataAge=3600&theme=light&autoRefresh=true" />
+						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=c3bafcbb-16d9-4553-ad73-e18a822cdaf1&maxDataAge=3600&theme=light&autoRefresh=true" />
 						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=2e6a63f7-d44b-4730-bc9c-294a8aff54fb&maxDataAge=3600&theme=light&autoRefresh=true" />
 						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=3854df79-bb6d-4463-9574-31cd4c36c82b&maxDataAge=3600&theme=light&autoRefresh=true" />
 					</div>
