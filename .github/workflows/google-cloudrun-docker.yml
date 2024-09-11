@@ -6,9 +6,9 @@ on:
 
 env:
   PROJECT_ID: kleenex-promo # TODO: update Google Cloud project id
-  GAR_NAME: kleenex-contingo
+  GAR_NAME: la-fiest-kleenbebe
   GAR_LOCATION: us-central1 # TODO: update Artifact Registry location
-  SERVICE: kleenex-dashboard # TODO: update Cloud Run service name
+  SERVICE: kleenbebe-dashboard # TODO: update Cloud Run service name
   REGION: us-central1 # TODO: update Cloud Run service region
 
 jobs:
