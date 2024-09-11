@@ -26,15 +26,15 @@ export default function Dashboard() {
 			<ScrollArea className="flex-1 flex flex-col p-4">
 				<div className="grid grid-cols-2 gap-4 flex-1">
 					<div className="grid grid-cols-3 gap-4 col-span-2">
-						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a8362a-bd16-43be-8490-4339996a1207&maxDataAge=3600&theme=light&autoRefresh=true" />
-						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a83667-87f2-47a3-8a7f-48f4f0c0ebfc&maxDataAge=3600&theme=light&autoRefresh=true" />
-						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a8387e-bd16-43ec-847a-4339997f84bb&maxDataAge=3600&theme=light&autoRefresh=true" />
+						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?idc3bafcbb-16d9-4553-ad73-e18a822cdaf1&maxDataAge=3600&theme=light&autoRefresh=true" />
+						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=2e6a63f7-d44b-4730-bc9c-294a8aff54fb&maxDataAge=3600&theme=light&autoRefresh=true" />
+						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=3854df79-bb6d-4463-9574-31cd4c36c82b&maxDataAge=3600&theme=light&autoRefresh=true" />
 					</div>
 					<div className="w-full h-full col-span-2">
-						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a83794-bd16-402e-8eb1-43399974bdb0&maxDataAge=3600&theme=light&autoRefresh=true" />
+						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=688c94da-c1c8-4703-9a79-a87db99ab7de&maxDataAge=3600&theme=light&autoRefresh=true" />
 					</div>
-					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a83743-fcbb-4c13-820f-551271ef4b08&maxDataAge=3600&theme=light&autoRefresh=true" />
-					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66a83858-d58d-46ac-8a80-cecb7e7c9240&maxDataAge=3600&theme=light&autoRefresh=true" />
+					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66165a33-cc90-4436-8118-8f7fed09cbfb&maxDataAge=3600&theme=light&autoRefresh=true" />
+					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=d611c9d9-3cd2-4af5-b925-b4be9a62b9cf&maxDataAge=3600&theme=light&autoRefresh=true" />
 				</div>
 			</ScrollArea>
 		</div>
