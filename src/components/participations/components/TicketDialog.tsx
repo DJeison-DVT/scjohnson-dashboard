@@ -122,8 +122,9 @@ export default function TicketDialog({
 					setReason('Folio Repetido');
 					await handleReject();
 				}
+				const body = await response.json();
 				toast({
-					title: 'Folio repetido',
+					title: body.detail || 'Error al aceptar ticket',
 					description: response.status,
 				});
 			} else {

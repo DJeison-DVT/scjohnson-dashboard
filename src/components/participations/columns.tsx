@@ -25,6 +25,7 @@ const StatusDisplayOptions: Record<Status, string> = {
 	rejected: 'Rechazado',
 	approved: 'Aprobado',
 	fullfiled: 'Entregado',
+	documents: 'Documentos',
 };
 
 export const columns: ColumnDef<Participation>[] = [
@@ -107,6 +108,7 @@ export const columns: ColumnDef<Participation>[] = [
 				column={column}
 				title="Estado"
 				options={[
+					'documents',
 					'complete',
 					'pending',
 					'incomplete',

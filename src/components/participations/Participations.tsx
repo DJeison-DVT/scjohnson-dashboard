@@ -8,6 +8,8 @@ import settings from '../../settings';
 import TicketDialog from './components/TicketDialog';
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { authorizedFetch } from '../../auth';
+import { toast } from '../ui/use-toast';
+import { Button } from '../ui/button';
 
 export default function Participations() {
 	const [participations, setParticipations] = useState<Participation[]>([]);
@@ -32,6 +34,10 @@ export default function Participations() {
 					name: item.user.name,
 					email: item.user.email,
 					complete: item.user.complete,
+					documented: item.user.documented,
+					ine_front_url: item.user.ine_front_url || '',
+					ine_back_url: item.user.ine_back_url || '',
+					proof_of_residence_url: item.user.proof_of_residence_url || '',
 				};
 
 				const result: Participation = {
@@ -77,15 +83,106 @@ export default function Participations() {
 		...originalColumns.slice(3), // Append the rest of the columns
 	];
 
+	const [documentationDisabled, setDocumentationDisabled] = useState<boolean>(true);
+	const [documentationChecks, setDocumentationChecks] = useState({
+		ine_front: false,
+		ine_back: false,
+		proof_of_residence: false,
+	});
+
+	const handleCheckboxChange = (event) => {
+		const { name, checked } = event.target;
+		setDocumentationChecks((prevState) => ({
+			...prevState,
+			[name]: checked,
+		}));
+	};
+
+
+	const onDocumentationConfirm = async (participation: Participation) => {
+		if (!documentationChecks.ine_front || !documentationChecks.ine_back || !documentationChecks.proof_of_residence) {
+			toast({
+				title: 'Favor de confirmar todos los documentos',
+			});
+			return;
+		}
+
+		setDocumentationDisabled(true);
+		try {
+			const url = `${settings.apiUrl}api/dashboard/accept-documents`;
+			const response = await authorizedFetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					ticket_id: participation.id,
+				}),
+			});
+			if (!response.ok) {
+				const body = await response.json();
+				toast({
+					title: body.detail || 'Error al aceptar ticket',
+					description: response.status,
+				});
+			} else {
+				toast({
+					title: 'Ticket aceptado',
+				});
+				await fetchParticipations();
+			}
+		} catch (error) {
+			console.error('Error aceptando la documentacion: ', error);
+		}
+		setDocumentationDisabled(false);
+	}
+
+	const onDocumentationReject = async (participation: Participation) => {
+		try {
+			const url = `${settings.apiUrl}api/dashboard/reject-documents`;
+			const response = await authorizedFetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					ticket_id: participation.id,
+				}),
+			});
+			if (!response.ok) {
+				const body = await response.json();
+				toast({
+					title: body.detail || 'Error al rechazar ticket',
+					description: response.status,
+				});
+			} else {
+				toast({
+					title: 'Ticket rechazado',
+				});
+				await fetchParticipations();
+			}
+		} catch (error) {
+			console.error('Error rechazando la documentacion: ', error);
+		}
+	}
+
 	useEffect(() => {
 		fetchParticipations();
 	}, []);
 
 	const renderSubComponent = ({ row }: { row: Row<Participation> }) => {
-		const name = row.original.user.name;
-		const email = row.original.user.email;
-		const prize = row.original.prize;
-		const priorityNumber = row.original.priorityNumber;
+		const participation = row.original
+		const user = participation.user;
+
+		const name = user.name;
+		const email = user.email;
+		const prize = participation.prize;
+		const priorityNumber = participation.priorityNumber;
+
+		const ine_front_url = user.ine_front_url;
+		const ine_back_url = user.ine_back_url;
+		const proof_of_residence_url = user.proof_of_residence_url;
+		const documented = user.documented;
 
 		return (
 			<div>
@@ -93,7 +190,8 @@ export default function Participations() {
 					<strong>Nombre:</strong> {name}
 				</p>
 				<p>
-					<strong>Premio:</strong> Cupon de ${prize}
+
+					<strong>Premio:</strong> {!isNaN(Number(prize)) ? `Cupon de ${prize}` : prize}
 				</p>
 				<p>
 					<strong>Numero de participacion:</strong> {priorityNumber}
@@ -101,6 +199,101 @@ export default function Participations() {
 				<p>
 					<strong>Email:</strong> {email}
 				</p>
+				{documented ? (
+					<p className='text-green-500'>Documentado</p>
+				) : (
+					<p className='text-red-500'>No documentado</p>
+				)}
+				<div className='flex p-4 gap-4'>
+					{ine_front_url && (
+						<div className='flex flex-col justify-center items-center'>
+							<p className='text-center font-bold'>INE Frontal</p>
+							<img
+								src={settings.bucketURL + ine_front_url}
+								alt='INE Front'
+								className='h-80 w-auto object-contain'
+							/>
+						</div>
+					)}
+					{ine_back_url && (
+						<div className='flex flex-col justify-center items-center'>
+							<p className='text-center font-bold'>INE Posterior</p>
+							<img
+								src={settings.bucketURL + ine_back_url}
+								alt='INE Back'
+								className='h-80 w-auto object-contain'
+							/>
+						</div>
+					)}
+					{proof_of_residence_url && (
+						<div className='flex flex-col justify-center items-center'>
+							<p className='text-center font-bold'>Comprobante de domicilio</p>
+							<img
+								src={settings.bucketURL + proof_of_residence_url}
+								alt='Proof of residence'
+								className='h-80 w-auto object-contain'
+							/>
+						</div>
+					)}
+					{ine_front_url && ine_back_url && proof_of_residence_url && !documented && (
+						<div>
+							<form className='flex flex-col gap-2'>
+								<div>
+									Confirmar documentacion:
+								</div>
+								<div className='flex-col flex [&>div]:flex [&>div]:gap-2 '>
+									<div>
+										<input
+											type="checkbox"
+											name="ine_front"
+											checked={documentationChecks.ine_front}
+											onChange={handleCheckboxChange}
+										/>
+										<label htmlFor="ine_front">He revisado el INE frontal.</label>
+									</div>
+									<div>
+										<input
+											type="checkbox"
+											name="ine_back"
+											checked={documentationChecks.ine_back}
+											onChange={handleCheckboxChange}
+										/>
+										<label htmlFor="ine_back">He revisado el INE posterior.</label>
+									</div>
+									<div>
+										<input
+											type="checkbox"
+											name="proof_of_residence"
+											checked={documentationChecks.proof_of_residence}
+											onChange={handleCheckboxChange}
+										/>
+
+										<label htmlFor="proof_of_residence">He revisado el comprobante de domicilio.</label>
+									</div>
+								</div>
+								<div className='flex gap-2'>
+
+									<Button
+										type="button"
+										onClick={() => onDocumentationConfirm(participation)}
+										disabled={
+											!documentationChecks.ine_front ||
+											!documentationChecks.ine_back ||
+											!documentationChecks.proof_of_residence
+										}
+									>
+										Confirmar
+									</Button>
+									<Button type="button" onClick={() => onDocumentationReject(participation)}
+										variant='destructive'
+									>
+										Rechazar
+									</Button>
+								</div>
+							</form>
+						</div>
+					)}
+				</div>
 			</div>
 		);
 	};

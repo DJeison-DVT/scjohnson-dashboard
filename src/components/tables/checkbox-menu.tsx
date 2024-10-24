@@ -35,7 +35,7 @@ export function DataTableColumnHeaderCheckbox<TData, TValue>({
 		return <div className={cn(className)}>{title}</div>;
 	}
 	const [selectedOptions, setSelectedOptions] = useState(
-		searchParams.get('status')?.split(',') || ['complete'],
+		searchParams.get('status')?.split(',') || ['documents', 'complete'],
 	);
 
 	const handleOptionChange = (checked: boolean, id: string) => {
@@ -50,7 +50,7 @@ export function DataTableColumnHeaderCheckbox<TData, TValue>({
 		column.setFilterValue(selectedOptions);
 		const params = new URLSearchParams(searchParams.toString());
 
-		if (JSON.stringify(selectedOptions) === JSON.stringify(['complete'])) {
+		if (JSON.stringify(selectedOptions) === JSON.stringify(['complete', 'documents'])) {
 			params.delete('status');
 		} else {
 			params.set('status', selectedOptions.join(','));
