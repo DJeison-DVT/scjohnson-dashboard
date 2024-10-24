@@ -284,6 +284,7 @@ export default function Participations() {
 									</Button>
 									<Button type="button" onClick={() => onDocumentationReject(participation)}
 										variant='destructive'
+										disabled
 									>
 										Rechazar
 									</Button>
