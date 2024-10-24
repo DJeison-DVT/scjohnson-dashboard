@@ -84,7 +84,6 @@ export default function Participations() {
 		...originalColumns.slice(3), // Append the rest of the columns
 	];
 
-	const [documentationDisabled, setDocumentationDisabled] = useState<boolean>(true);
 	const [documentationChecks, setDocumentationChecks] = useState({
 		ine_front: false,
 		ine_back: false,
@@ -108,7 +107,6 @@ export default function Participations() {
 			return;
 		}
 
-		setDocumentationDisabled(true);
 		try {
 			const url = `${settings.apiUrl}api/dashboard/accept-documents`;
 			const response = await authorizedFetch(url, {
@@ -135,7 +133,6 @@ export default function Participations() {
 		} catch (error) {
 			console.error('Error aceptando la documentacion: ', error);
 		}
-		setDocumentationDisabled(false);
 	}
 
 	const onDocumentationReject = async (participation: Participation) => {
@@ -281,7 +278,6 @@ export default function Participations() {
 											!documentationChecks.ine_front ||
 											!documentationChecks.ine_back ||
 											!documentationChecks.proof_of_residence ||
-											documentationDisabled
 										}
 									>
 										Confirmar
