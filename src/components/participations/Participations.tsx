@@ -277,7 +277,7 @@ export default function Participations() {
 										disabled={
 											!documentationChecks.ine_front ||
 											!documentationChecks.ine_back ||
-											!documentationChecks.proof_of_residence ||
+											!documentationChecks.proof_of_residence
 										}
 									>
 										Confirmar
