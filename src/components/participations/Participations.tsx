@@ -50,6 +50,7 @@ export default function Participations() {
 					status: item.status,
 					flow: item.flow,
 					prize: item.prize,
+					prize_type: item.prize_type,
 					serial_number: item.serial_number,
 				};
 
@@ -90,7 +91,7 @@ export default function Participations() {
 		proof_of_residence: false,
 	});
 
-	const handleCheckboxChange = (event) => {
+	const handleCheckboxChange = (event: any) => {
 		const { name, checked } = event.target;
 		setDocumentationChecks((prevState) => ({
 			...prevState,
@@ -279,7 +280,8 @@ export default function Participations() {
 										disabled={
 											!documentationChecks.ine_front ||
 											!documentationChecks.ine_back ||
-											!documentationChecks.proof_of_residence
+											!documentationChecks.proof_of_residence ||
+											documentationDisabled
 										}
 									>
 										Confirmar

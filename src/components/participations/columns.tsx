@@ -28,6 +28,11 @@ const StatusDisplayOptions: Record<Status, string> = {
 	documents: 'Documentos',
 };
 
+const prizeTypeDisplayOptions: Record<string, string> = {
+	physical: 'Físico',
+	digital: 'Digital',
+};
+
 export const columns: ColumnDef<Participation>[] = [
 	{
 		id: 'more',
@@ -99,6 +104,15 @@ export const columns: ColumnDef<Participation>[] = [
 	{
 		accessorKey: 'prize',
 		header: 'Premio',
+	},
+	{
+		accessorKey: 'prize_type',
+		id: 'prize_type',
+		header: 'Tipo de Premio',
+		cell: ({ row }) => {
+			const prizeType = row.getValue<string>('prize_type');
+			return prizeType ? prizeTypeDisplayOptions[prizeType] : null;
+		},
 	},
 	{
 		accessorKey: 'status',

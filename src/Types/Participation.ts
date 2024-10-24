@@ -10,6 +10,7 @@ export type Participation = {
 	status: string;
 	flow: string;
 	prize: string;
+	prize_type: string;
 	serial_number: string;
 };
 
