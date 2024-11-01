@@ -33,11 +33,13 @@ export default function Participations() {
 					terms: item.user.terms,
 					name: item.user.name,
 					email: item.user.email,
+					address: item.user.physical_address || '',
 					complete: item.user.complete,
-					documented: item.user.documented,
+					documented: item.user.documentation_validated,
 					ine_front_url: item.user.ine_front_url || '',
 					ine_back_url: item.user.ine_back_url || '',
 					proof_of_residence_url: item.user.proof_of_residence_url || '',
+					tax_status_certificate_url: item.user.tax_status_certificate_url || '',
 				};
 
 				const result: Participation = {
@@ -174,12 +176,14 @@ export default function Participations() {
 
 		const name = user.name;
 		const email = user.email;
+		const address = user.address;
 		const prize = participation.prize;
 		const priorityNumber = participation.priorityNumber;
 
 		const ine_front_url = user.ine_front_url;
 		const ine_back_url = user.ine_back_url;
 		const proof_of_residence_url = user.proof_of_residence_url;
+		const tax_status_certificate_url = user.tax_status_certificate_url;
 		const documented = user.documented;
 
 		return (
@@ -197,6 +201,24 @@ export default function Participations() {
 				<p>
 					<strong>Email:</strong> {email}
 				</p>
+				{address && (
+					<p>
+						<strong>Dirección:</strong> {address}
+					</p>
+				)}
+				{tax_status_certificate_url && (
+					<div>
+						<strong>Constancia de situación fiscal:</strong>{' '}
+						<a
+							href={settings.bucketURL + tax_status_certificate_url}
+							target='_blank'
+							rel='noreferrer'
+							className='bg-gray-400 p-1 rounded-md'
+						>
+							Ver
+						</a>
+					</div>
+				)}
 				{documented ? (
 					<p className='text-green-500'>Documentado</p>
 				) : (
@@ -284,7 +306,6 @@ export default function Participations() {
 									</Button>
 									<Button type="button" onClick={() => onDocumentationReject(participation)}
 										variant='destructive'
-										disabled
 									>
 										Rechazar
 									</Button>
