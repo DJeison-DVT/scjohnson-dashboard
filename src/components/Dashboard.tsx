@@ -1,4 +1,3 @@
-import { userInfo } from 'os';
 import { ScrollArea } from './ui/scroll-area';
 import { useLoaderData } from 'react-router-dom';
 
