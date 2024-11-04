@@ -1,4 +1,6 @@
+import { userInfo } from 'os';
 import { ScrollArea } from './ui/scroll-area';
+import { useLoaderData } from 'react-router-dom';
 
 interface ChartEmbedProps {
 	chartLink: string;
@@ -21,6 +23,7 @@ const ChartEmbed: React.FC<ChartEmbedProps> = ({ chartLink }) => {
 };
 
 export default function Dashboard() {
+	const { role } = useLoaderData() as { role: string }
 	return (
 		<div className="flex-1 w-full flex flex-col overflow-hidden bg-background">
 			<ScrollArea className="flex-1 flex flex-col p-4">
@@ -33,8 +36,12 @@ export default function Dashboard() {
 					<div className="w-full h-full col-span-2">
 						<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=688c94da-c1c8-4703-9a79-a87db99ab7de&maxDataAge=3600&theme=light&autoRefresh=true" />
 					</div>
-					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66165a33-cc90-4436-8118-8f7fed09cbfb&maxDataAge=3600&theme=light&autoRefresh=true" />
-					<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=d611c9d9-3cd2-4af5-b925-b4be9a62b9cf&maxDataAge=3600&theme=light&autoRefresh=true" />
+					{role !== 'viewer' && (
+						<>
+							<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=66165a33-cc90-4436-8118-8f7fed09cbfb&maxDataAge=3600&theme=light&autoRefresh=true" />
+							<ChartEmbed chartLink="https://charts.mongodb.com/charts-kleenex-promo-qiyrdzy/embed/charts?id=d611c9d9-3cd2-4af5-b925-b4be9a62b9cf&maxDataAge=3600&theme=light&autoRefresh=true" />
+						</>
+					)}
 				</div>
 			</ScrollArea>
 		</div>
