@@ -141,6 +141,9 @@ export default function UserCreationDialog({
 											<ToggleGroupItem value="user">
 												Verificador
 											</ToggleGroupItem>
+											<ToggleGroupItem value="viewer">
+												Visualizador
+											</ToggleGroupItem>
 										</ToggleGroup>
 									</div>
 									<FormMessage />

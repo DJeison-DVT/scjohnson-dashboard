@@ -60,23 +60,32 @@ export default function Sidebar() {
 			</div>
 			<div className="flex flex-col bg-dark flex-1">
 				<nav className="flex flex-col  text-primary flex-1 *:p-4">
-					<NavigationTab to="/dashboard" end>
-						<Gauge />
-						Dashboard
-					</NavigationTab>
-					<NavigationTab to="/dashboard/participations">
-						<ShoppingCart />
-						Participaciones
-					</NavigationTab>
-					<NavigationTab to="/dashboard/prizes">
-						<Award />
-						Premios
-					</NavigationTab>
-					{role === 'admin' && (
-						<NavigationTab to="/dashboard/users">
-							<Contact />
-							Usuarios
+					{role === 'viewer' ? (
+						<NavigationTab to="/dashboard" end>
+							<Gauge />
+							Dashboard
 						</NavigationTab>
+					) : (
+						<>
+							<NavigationTab to="/dashboard" end>
+								<Gauge />
+								Dashboard
+							</NavigationTab>
+							<NavigationTab to="/dashboard/participations">
+								<ShoppingCart />
+								Participaciones
+							</NavigationTab>
+							<NavigationTab to="/dashboard/prizes">
+								<Award />
+								Premios
+							</NavigationTab>
+							{role === 'admin' && (
+								<NavigationTab to="/dashboard/users">
+									<Contact />
+									Usuarios
+								</NavigationTab>
+							)}
+						</>
 					)}
 				</nav>
 				<AuthStatus />

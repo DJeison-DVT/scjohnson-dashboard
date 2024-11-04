@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { authProvider, loginAction } from '../auth';
-import { authenticatedLoader, protectedLoader, adminLoader } from './Loaders';
+import { authenticatedLoader, protectedLoader, adminLoader, userOrAdminLoader } from './Loaders';
 import Dashboard from '../components/Dashboard';
 import Login from '../components/Login';
 import Layout from '../components/Layout';
@@ -42,10 +42,12 @@ const router = createBrowserRouter([
 					{
 						path: 'participations',
 						element: <Participations />,
+						loader: userOrAdminLoader,
 					},
 					{
 						path: 'prizes',
 						element: <Prizes />,
+						loader: userOrAdminLoader,
 					},
 					{
 						path: 'users',
