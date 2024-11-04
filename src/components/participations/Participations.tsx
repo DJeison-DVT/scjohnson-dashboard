@@ -10,6 +10,7 @@ import { ColumnDef, Row } from '@tanstack/react-table';
 import { authorizedFetch } from '../../auth';
 import { toast } from '../ui/use-toast';
 import { Button } from '../ui/button';
+import FullImage from '../ui/full-image';
 
 export default function Participations() {
 	const [participations, setParticipations] = useState<Participation[]>([]);
@@ -228,31 +229,37 @@ export default function Participations() {
 					{ine_front_url && (
 						<div className='flex flex-col justify-center items-center'>
 							<p className='text-center font-bold'>INE Frontal</p>
-							<img
-								src={settings.bucketURL + ine_front_url}
-								alt='INE Front'
-								className='h-80 w-auto object-contain'
-							/>
+							<FullImage src={settings.bucketURL + ine_front_url} alt='INE Front'>
+								<img
+									src={settings.bucketURL + ine_front_url}
+									alt='INE Front'
+									className='h-80 w-auto object-contain'
+								/>
+							</FullImage>
 						</div>
 					)}
 					{ine_back_url && (
 						<div className='flex flex-col justify-center items-center'>
 							<p className='text-center font-bold'>INE Posterior</p>
-							<img
-								src={settings.bucketURL + ine_back_url}
-								alt='INE Back'
-								className='h-80 w-auto object-contain'
-							/>
+							<FullImage src={settings.bucketURL + ine_back_url} alt='INE Back'>
+								<img
+									src={settings.bucketURL + ine_back_url}
+									alt='INE Back'
+									className='h-80 w-auto object-contain'
+								/>
+							</FullImage>
 						</div>
 					)}
 					{proof_of_residence_url && (
 						<div className='flex flex-col justify-center items-center'>
 							<p className='text-center font-bold'>Comprobante de domicilio</p>
-							<img
-								src={settings.bucketURL + proof_of_residence_url}
-								alt='Proof of residence'
-								className='h-80 w-auto object-contain'
-							/>
+							<FullImage src={settings.bucketURL + proof_of_residence_url} alt='Proof of residence'>
+								<img
+									src={settings.bucketURL + proof_of_residence_url}
+									alt='Proof of residence'
+									className='h-80 w-auto object-contain'
+								/>
+							</FullImage>
 						</div>
 					)}
 					{ine_front_url && ine_back_url && proof_of_residence_url && !documented && (

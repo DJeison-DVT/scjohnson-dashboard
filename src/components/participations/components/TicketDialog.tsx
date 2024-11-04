@@ -43,6 +43,7 @@ import { useToast } from '../../ui/use-toast';
 import settings from '../../../settings';
 import { Participation } from '../../../Types/Participation';
 import { authorizedFetch } from '../../../auth';
+import FullImage from '../../ui/full-image';
 
 const ticketNumberSchema = z.object({
 	ticketNumber: z.string(),
@@ -70,6 +71,10 @@ export default function TicketDialog({
 			ticketNumber: participation.serial_number || '',
 		},
 	});
+
+	const setFormTicketNumber = (ticketNumber: string) => {
+		form.setValue('ticketNumber', ticketNumber);
+	}
 
 	const handleReject = async () => {
 		setDisabled(true);
@@ -153,10 +158,12 @@ export default function TicketDialog({
 				<DialogDescription asChild>
 					<div className="flex h-80">
 						<div className="min-w-[500px]">
-							<img
-								className="max-h-[600px]"
-								src={`${settings.bucketURL + participation.ticketUrl}`}
-							/>
+							<FullImage src={`${settings.bucketURL + participation.ticketUrl}`} alt="ticket" setParentField={setFormTicketNumber}>
+								<img
+									className="max-h-[600px]"
+									src={`${settings.bucketURL + participation.ticketUrl}`}
+								/>
+							</FullImage>
 						</div>
 						<div className="grid grid-cols-2 grid-rows-2 h-fit min-w-[260px] gap-3 m-5">
 							<Form {...form}>
