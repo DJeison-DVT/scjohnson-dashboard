@@ -7,7 +7,6 @@ import {
     DialogTrigger,
 } from './dialog';
 import '../styles/full-image.css';
-import { Input } from './input';
 
 interface FullImageProps {
     children: ReactNode;
