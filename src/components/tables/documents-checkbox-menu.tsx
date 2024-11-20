@@ -20,7 +20,7 @@ interface DataTableColumnHeaderProps<TData, TValue> {
 	displayOptions?: { [key: string]: string };
 }
 
-export function DataTableColumnHeaderCheckbox<TData, TValue>({
+export default function DocumentsDataTableColumnHeaderCheckbox<TData, TValue>({
 	column,
 	title,
 	className,

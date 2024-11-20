@@ -1,10 +1,11 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Participation, Status } from '../../Types/Participation';
-import { DataTableColumnHeaderCheckbox } from '../tables/checkbox-menu';
+import DocumentsDataTableColumnHeaderCheckbox from '../tables/documents-checkbox-menu';
 import { DataTableColumnHeaderSearch } from '../tables/search-menu';
 import { isPhoneFilterFn, isSelectedFilterFn } from './filters';
 import MessageHistory from './components/MessageHistory';
 import { Minus, Plus } from 'lucide-react';
+import TypeDataTableColumnHeaderCheckbox from '../tables/type-checkbox-menu';
 
 interface expandButtonProps {
 	children?: React.ReactNode;
@@ -108,7 +109,18 @@ export const columns: ColumnDef<Participation>[] = [
 	{
 		accessorKey: 'prize_type',
 		id: 'prize_type',
-		header: 'Tipo de Premio',
+		header: ({ column }) => (
+			<TypeDataTableColumnHeaderCheckbox
+				column={column}
+				title="Tipo"
+				options={[
+					'physical',
+					'digital',
+				]}
+				displayOptions={StatusDisplayOptions}
+			/>
+		),
+		filterFn: isSelectedFilterFn,
 		cell: ({ row }) => {
 			const prizeType = row.getValue<string>('prize_type');
 			return prizeType ? prizeTypeDisplayOptions[prizeType] : null;
@@ -118,7 +130,7 @@ export const columns: ColumnDef<Participation>[] = [
 		accessorKey: 'status',
 		id: 'status',
 		header: ({ column }) => (
-			<DataTableColumnHeaderCheckbox
+			<DocumentsDataTableColumnHeaderCheckbox
 				column={column}
 				title="Estado"
 				options={[
@@ -135,7 +147,7 @@ export const columns: ColumnDef<Participation>[] = [
 		),
 		filterFn: isSelectedFilterFn,
 		cell: ({ row }) => {
-			const status = row.getValue<string>('status').toLowerCase() as Status;
+			const status = row.getValue<string>('status') as Status;
 			return status ? (
 				<div>
 					{StatusDisplayOptions[status] ? StatusDisplayOptions[status] : status}

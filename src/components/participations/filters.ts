@@ -5,7 +5,10 @@ export const isSelectedFilterFn: FilterFn<any> = <TData>(
 	columnId: string,
 	filterValues: string[],
 ) => {
-	const value = row.getValue<string>(columnId).toLowerCase().trim();
+	let value = row.getValue<string>(columnId);
+	if (value !== null) {
+		value = value.toLowerCase().trim();
+	}
 	return filterValues.includes(value);
 };
 
