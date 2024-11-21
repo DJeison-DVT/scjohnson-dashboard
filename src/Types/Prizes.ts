@@ -1,5 +1,6 @@
 export type PrizeInfo = {
-	name: number;
+	name: string;
+	type: string;
 	available: number;
 	taken: number;
 	total: number;
