@@ -32,11 +32,12 @@ export default function Participations() {
 					id: userId,
 					phone: item.user.phone,
 					terms: item.user.terms,
+					business: item.user.business,
 					name: item.user.name,
 					email: item.user.email,
 					address: item.user.physical_address || '',
 					complete: item.user.complete,
-					documented: item.user.documentation_validated,
+					documented: item.user.documented || false,
 					ine_front_url: item.user.ine_front_url || '',
 					ine_back_url: item.user.ine_back_url || '',
 					proof_of_residence_url: item.user.proof_of_residence_url || '',
@@ -178,6 +179,7 @@ export default function Participations() {
 		const name = user.name;
 		const email = user.email;
 		const address = user.address;
+		const business = user.business;
 		const prize = participation.prize;
 		const priorityNumber = participation.priorityNumber;
 
@@ -205,6 +207,11 @@ export default function Participations() {
 				{address && (
 					<p>
 						<strong>Dirección:</strong> {address}
+					</p>
+				)}
+				{business && (
+					<p>
+						<strong>Empresa:</strong> {business}
 					</p>
 				)}
 				{tax_status_certificate_url && (

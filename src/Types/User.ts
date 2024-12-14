@@ -4,6 +4,7 @@ export type User = {
 	terms: boolean;
 	name: string;
 	email: string;
+	business: string;
 	address: string;
 	complete: boolean;
 	documented: boolean;
